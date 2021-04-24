@@ -1,26 +1,36 @@
-* {
-  box-sizing: border-box;
+/* Global */
+:root {
+  /* Color */
+  --color-white: #fff;
+  --color-light-white: #eee;
+  --color-dark-white: #bdbdbd;
+  --color-pink: #fe918d;
+  --color-dark-pink: #ff6863;
+  --color-black: #000;
+  --color-gray: #616161;
+  --color-light-gray: #7c7979;
+  --color-dark-gray: #4d4d4d;
+  --color-blue: #73aace;
+  --color-yellow: #fff7d1;
+  --color-orange: #feb546;
+
+  /* Font size */
+  --font-large: 48px;
+  --font-medium: 28px;
+  --font-regular: 18px;
+  --font-small: 16px;
+  --font-micro: 14px;
+
+  /* Font weigth */
+  --weight-bold: 700;
+  --weight-semi-bold: 600;
+  --weight-regular: 400;
+
+  /* Size */
+
 }
 
-body {
-  margin: 0;
-  padding: 0;
-}
-
-.navbar__logo__icon {
-  width: 25px;
-  height: 25px;;
-}
-
-.jobs__logo {
-  width: 70px;
-
-}
-
-.project__img {
-  width: 200px;
-}
-
-.testimonials__img {
-  width: 100px;
+/* Universal tags */
+*, *:before, *:after {
+  box-sizing: border-box; 
 }
