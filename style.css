@@ -493,4 +493,26 @@ p {
     width: 100%;
     display: none;
   }
+
+  .about__majors {
+    flex-direction: column;
+  }
+
+  .major {
+    margin-bottom: 40px;
+  }
+
+  .skillset {
+    flex-direction: column;
+  }
+
+  .project {
+    width: 100%;
+    flex-grow: 1;
+  }
+
+  .testimonial__avatar {
+    width: 80px;
+    height: 80px;
+  }
 }
