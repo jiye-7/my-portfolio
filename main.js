@@ -8,7 +8,7 @@
 
 const navbar = document.querySelector('#navbar');
 const navbarMenu = document.querySelector('.navbar__menu');
-const menuContact = document.querySelector('.menu__contact');
+const contactBtn = document.querySelector('.home__contact');
 
 const work = document.querySelector('#work');
 
@@ -28,7 +28,7 @@ document.addEventListener('scroll', () => {
 });
 
 /* Handle scrolling when tapping on the navbar menu */
-let handleMoveMenu = (e) => {
+const handleMoveMenu = (e) => {
   const menuLi = e.target;
   const link = menuLi.dataset.link;
 
@@ -36,8 +36,9 @@ let handleMoveMenu = (e) => {
     return;
   }
   // 이동하고자하는 section의 id를 잘 받아왔 때 실행
-  const scrollTo = document.querySelector(link);
-  scrollTo.scrollIntoView({ 'behavior': 'smooth' });
+  scrollIntoView(link);
+  // const scrollTo = document.querySelector(link);
+  // scrollTo.scrollIntoView({ 'behavior': 'smooth' });
 
   /* if (menuLi.classList.contains('navbar__menu__item')) { //menuLi.nodeName === 'LI'
       let menuPosition = menuLi.dataset.link;
@@ -47,5 +48,15 @@ let handleMoveMenu = (e) => {
     } */
 }
 
+/* Handle click on "contact me" button on home */
+const handleMoveContact = (e) => {
+  scrollIntoView('#contact')
+}
+
+let scrollIntoView = (selector) => {
+  const scrollContactMe = document.querySelector(selector);
+  scrollContactMe.scrollIntoView({ 'behavior': 'smooth' });
+}
+
 navbarMenu.addEventListener('click', handleMoveMenu);
-navbarMenu.addEventListener('click', handleMoveMenu);
+contactBtn.addEventListener('click', handleMoveContact);
