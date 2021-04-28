@@ -29,16 +29,22 @@ document.addEventListener('scroll', () => {
 
 /* Handle scrolling when tapping on the navbar menu */
 let handleMoveMenu = (e) => {
-  e.preventDefault();
   const menuLi = e.target;
-  console.log(menuLi);
+  const link = menuLi.dataset.link;
 
-  if (menuLi.classList.contains('navbar__menu__item')) { //menuLi.nodeName === 'LI'
-    let menuPosition = menuLi.dataset.link;
-    let target = document.querySelector(`${menuPosition}`);
-    console.log(target);
-    target.scrollIntoView({ 'behavior': 'smooth' });
+  if (link === null || link === undefined) {
+    return;
   }
+  // 이동하고자하는 section의 id를 잘 받아왔 때 실행
+  const scrollTo = document.querySelector(link);
+  scrollTo.scrollIntoView({ 'behavior': 'smooth' });
+
+  /* if (menuLi.classList.contains('navbar__menu__item')) { //menuLi.nodeName === 'LI'
+      let menuPosition = menuLi.dataset.link;
+      let target = document.querySelector(`${menuPosition}`);
+      console.log(target);
+      target.scrollIntoView({ 'behavior': 'smooth' });
+    } */
 }
 
 navbarMenu.addEventListener('click', handleMoveMenu);
