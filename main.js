@@ -4,12 +4,12 @@
   1. navbar 구현해야 될 것
     1-1. 화면 맨 위에서 scroll시 navbar backgroun-color 변경, font-color 변경
     1-2. 해당 메뉴 클릭시, 해당 위치로 이동 --> 스크롤 이벤트
+  2. scrolling되면 home을 조금씩 투명하게 만들기 --> fade
 */
 
 const navbar = document.querySelector('#navbar');
 const navbarMenu = document.querySelector('.navbar__menu');
 const contactBtn = document.querySelector('.home__contact');
-
 const work = document.querySelector('#work');
 
 /* Make navbar transparent when it is on the top */
@@ -40,6 +40,7 @@ const handleMoveMenu = (e) => {
   // const scrollTo = document.querySelector(link);
   // scrollTo.scrollIntoView({ 'behavior': 'smooth' });
 
+  // another anwser
   /* if (menuLi.classList.contains('navbar__menu__item')) { //menuLi.nodeName === 'LI'
       let menuPosition = menuLi.dataset.link;
       let target = document.querySelector(`${menuPosition}`);
@@ -50,13 +51,24 @@ const handleMoveMenu = (e) => {
 
 /* Handle click on "contact me" button on home */
 const handleMoveContact = (e) => {
-  scrollIntoView('#contact')
+  scrollIntoView('#contact');
 }
 
+/* Make home slowly fade to transparent as the window scrolls */
+const home = document.querySelector('.home__container');
+const homeHeigth = home.getBoundingClientRect().height;
+
+document.addEventListener('scroll', () => {
+  // console.log(1 - window.scrollY / homeHeigth); // homeHeigth: 712, window.scrollY: 0 --> 0/800 --> 0 ==> 1 - 0 = 1, opacity = 1;
+  home.style.opacity = 1 - window.scrollY / homeHeigth;
+});
+
+/* scrollIntoView 기능 따로 함수로 정의 */
 let scrollIntoView = (selector) => {
   const scrollContactMe = document.querySelector(selector);
   scrollContactMe.scrollIntoView({ 'behavior': 'smooth' });
 }
 
+// home.addEventListener('scroll', handleMoveHome);
 navbarMenu.addEventListener('click', handleMoveMenu);
 contactBtn.addEventListener('click', handleMoveContact);
