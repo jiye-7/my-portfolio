@@ -5,6 +5,7 @@
     1-1. 화면 맨 위에서 scroll시 navbar backgroun-color 변경, font-color 변경
     1-2. 해당 메뉴 클릭시, 해당 위치로 이동 --> 스크롤 이벤트
   2. scrolling되면 home을 조금씩 투명하게 만들기 --> fade
+  3. 화면을 scrolling하면 오르쪽 하단에 화살표 버튼을 만들어서 화면의 어느 영역에서든지 해당 버튼을 클릭하면, 맨 위로 올라가는 이벤트 적용하기
 */
 
 const navbar = document.querySelector('#navbar');
@@ -13,6 +14,7 @@ const contactBtn = document.querySelector('.home__contact');
 const work = document.querySelector('#work');
 
 /* Make navbar transparent when it is on the top */
+
 document.addEventListener('scroll', () => {
   const scrollY = window.scrollY;
   const menuY = navbar.getBoundingClientRect().height;
@@ -63,12 +65,27 @@ document.addEventListener('scroll', () => {
   home.style.opacity = 1 - window.scrollY / homeHeigth;
 });
 
+/* Show "arrow up" button when scrolling down */
+const arrowUp = document.querySelector('.arrow-up');
+
+document.addEventListener('scroll', () => {
+  if (window.scrollY > homeHeigth / 2) {
+    arrowUp.classList.add('visible');
+  } else {
+    arrowUp.classList.remove('visible');
+  }
+});
+
+/* Handle click on th "arror up" button */
+arrowUp.addEventListener('click', () => {
+  scrollIntoView('#home');
+});
+
 /* scrollIntoView 기능 따로 함수로 정의 */
 let scrollIntoView = (selector) => {
   const scrollContactMe = document.querySelector(selector);
   scrollContactMe.scrollIntoView({ 'behavior': 'smooth' });
 }
 
-// home.addEventListener('scroll', handleMoveHome);
 navbarMenu.addEventListener('click', handleMoveMenu);
 contactBtn.addEventListener('click', handleMoveContact);

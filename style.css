@@ -489,6 +489,30 @@ p {
   color: var(--color-yellow);
 }
 
+/* Scroll */
+
+.arrow-up {
+  position: fixed;
+  right: 50px;
+  bottom: 50px;
+  width: 70px;
+  height: 70px;
+  font-size: 50px;
+  color: var(--color-white);
+  background-color: var(--color-pink);
+  border-radius: 50%;
+  /* display: none; */ /* display같은 경우는 완전히 없어졌다가 나타나는 것이라 애니메이션이 되지 않음! */
+  opacity: 0;
+  pointer-events: none; /* 클릭이 안 되게 만들기 */
+  transition: opacity 300ms ease-in;
+}
+
+.arrow-up.visible {
+  /* display: block; */
+  opacity: 1;
+  pointer-events: auto;
+}
+
 /* For below 768px screen width */
 @media screen and (max-width: 768px) {
   .navbar__toggle-btn {
@@ -529,3 +553,4 @@ p {
     height: 80px;
   }
 }
+
