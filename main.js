@@ -5,7 +5,9 @@
     1-1. 화면 맨 위에서 scroll시 navbar backgroun-color 변경, font-color 변경
     1-2. 해당 메뉴 클릭시, 해당 위치로 이동 --> 스크롤 이벤트
   2. scrolling되면 home을 조금씩 투명하게 만들기 --> fade
-  3. 화면을 scrolling하면 오르쪽 하단에 화살표 버튼을 만들어서 화면의 어느 영역에서든지 해당 버튼을 클릭하면, 맨 위로 올라가는 이벤트 적용하기
+  3. 화면을 scrolling하면 오른쪽 하단에 화살표 버튼을 만들어서 화면의 어느 영역에서든지 해당 버튼을 클릭하면, 맨 위로 올라가는 이벤트 적용하기
+  4. 프로젝트에서 카테고리 버튼을 누르면 원하는 아이템 보여주기
+    전체적인 애니메이션이 일어나고, 필터링된 아이템들만 보여야 된다.
 */
 
 const navbar = document.querySelector('#navbar');
@@ -81,6 +83,36 @@ arrowUp.addEventListener('click', () => {
   scrollIntoView('#home');
 });
 
+/* html data를 이용해서 프로젝트 필터링하기 */
+/* work__categories안에 있는 버튼이 클릭되면, 버튼이 갖고있는 data-filter값에 따라서 그 data-type에 해당하는 요소만 보여주기 */
+/* Project */
+const workBtnContainer = document.querySelector('.work__categories');
+const projectContainer = document.querySelector('.work__projects');
+const projects = document.querySelectorAll('.project');
+
+let handleViewProject = (e) => {
+  const filter = e.target.dataset.filter || e.target.parentNode.dataset.filter;
+
+  if (filter === null) {
+    return;
+  }
+  projectContainer.classList.add('animation-out');
+
+  setTimeout(() => {
+    // project마다 돌면서 project들을 안보이게 하기
+    projects.forEach((project) => {
+      // 전부다 이거나 filter와 data-type이 일치하면
+      if (filter === '*' || filter === project.dataset.type) {
+        // 기본적으로는 다 보여지는데 클릭 할 때 filter가 맞으면 안 보여지는 클래스는 빼기
+        project.classList.remove('invisible');
+      } else {
+        project.classList.add('invisible');
+      }
+    });
+    projectContainer.classList.remove('animation-out');
+  }, 300);
+}
+
 /* scrollIntoView 기능 따로 함수로 정의 */
 let scrollIntoView = (selector) => {
   const scrollContactMe = document.querySelector(selector);
@@ -89,3 +121,4 @@ let scrollIntoView = (selector) => {
 
 navbarMenu.addEventListener('click', handleMoveMenu);
 contactBtn.addEventListener('click', handleMoveContact);
+workBtnContainer.addEventListener('click', handleViewProject);
