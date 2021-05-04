@@ -8,6 +8,7 @@
   3. 화면을 scrolling하면 오른쪽 하단에 화살표 버튼을 만들어서 화면의 어느 영역에서든지 해당 버튼을 클릭하면, 맨 위로 올라가는 이벤트 적용하기
   4. 프로젝트에서 카테고리 버튼을 누르면 원하는 아이템 보여주기
     전체적인 애니메이션이 일어나고, 필터링된 아이템들만 보여야 된다.
+  5. navbar에서 메뉴 클릭 시 해당 메뉴 background-color 변경, border 변경
 */
 
 const navbar = document.querySelector('#navbar');
@@ -16,7 +17,6 @@ const contactBtn = document.querySelector('.home__contact');
 const work = document.querySelector('#work');
 
 /* Make navbar transparent when it is on the top */
-
 document.addEventListener('scroll', () => {
   const scrollY = window.scrollY;
   const menuY = navbar.getBoundingClientRect().height;
@@ -96,6 +96,13 @@ let handleViewProject = (e) => {
   if (filter === null) {
     return;
   }
+
+  // Remove selection from the previous item and select the new one
+  const active = document.querySelector('.category__btn.selected');
+  active.classList.remove('selected');
+  const target = e.target.nodeName === 'BUTTON' ? e.target : e.target.parentNode; // target의 nodeName이 BUTTON이면 그대로 이 타겟을 사용하고, 아니면 span태그라는 얘기니까 그 타겟의 부모 노드를 쓴다.
+  target.classList.add('selected');
+
   projectContainer.classList.add('animation-out');
 
   setTimeout(() => {
@@ -111,6 +118,12 @@ let handleViewProject = (e) => {
     });
     projectContainer.classList.remove('animation-out');
   }, 300);
+}
+
+/* menu, project click border */
+let handleClickBorder = (e) => {
+  // 클릭된 .categories__btn / navbar__menu__item 
+
 }
 
 /* scrollIntoView 기능 따로 함수로 정의 */
