@@ -9,6 +9,8 @@
   4. 프로젝트에서 카테고리 버튼을 누르면 원하는 아이템 보여주기
     전체적인 애니메이션이 일어나고, 필터링된 아이템들만 보여야 된다.
   5. navbar에서 메뉴 클릭 시 해당 메뉴 background-color 변경, border 변경
+  6. 해당 프로젝트 탭 클릭시 background-color 변경, border 변경
+  7. 화면 메뉴바 클릭시 메뉴 토글링
 */
 
 const navbar = document.querySelector('#navbar');
@@ -31,6 +33,13 @@ document.addEventListener('scroll', () => {
   }
 });
 
+/* Navbar toggle button for small screen */
+
+const navbarToggleBtn = document.querySelector('.navbar__toggle-btn');
+let handleMenuToogle = () => {
+  navbarMenu.classList.toggle('open');
+}
+
 /* Handle scrolling when tapping on the navbar menu */
 const handleMoveMenu = (e) => {
   const menuLi = e.target;
@@ -39,6 +48,10 @@ const handleMoveMenu = (e) => {
   if (link === null || link === undefined) {
     return;
   }
+
+  // navbarMenu에서 클릭을 통해 스크롤 이벤트가 발생하면, 항상 창을 닫힐 수 있도록 설정
+  navbarMenu.classList.remove('open');
+
   // 이동하고자하는 section의 id를 잘 받아왔 때 실행
   scrollIntoView(link);
   // const scrollTo = document.querySelector(link);
@@ -120,12 +133,6 @@ let handleViewProject = (e) => {
   }, 300);
 }
 
-/* menu, project click border */
-let handleClickBorder = (e) => {
-  // 클릭된 .categories__btn / navbar__menu__item 
-
-}
-
 /* scrollIntoView 기능 따로 함수로 정의 */
 let scrollIntoView = (selector) => {
   const scrollContactMe = document.querySelector(selector);
@@ -135,3 +142,4 @@ let scrollIntoView = (selector) => {
 navbarMenu.addEventListener('click', handleMoveMenu);
 contactBtn.addEventListener('click', handleMoveContact);
 workBtnContainer.addEventListener('click', handleViewProject);
+navbarToggleBtn.addEventListener('click', handleMenuToogle);
